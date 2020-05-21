@@ -1,0 +1,27 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  function a({ info: { name, age, sex = 'boy' } }) {
+    console.log(name)
+    console.log(sex)
+  }
+  const obj = {
+    info: {
+      name: '1',
+      age: 2,
+      // sex: 'girl'
+    }
+  }
+  a(obj)
+</script>
+
+</html>

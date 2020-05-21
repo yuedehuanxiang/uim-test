@@ -9,7 +9,7 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const Login = ({ dispatch }) => {
+const Login = ({ dispatch, loading }) => {
   const onFinish = values => {
     console.log('Success:', values);
     dispatch({
@@ -53,7 +53,7 @@ const Login = ({ dispatch }) => {
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button block type="primary" htmlType="submit">
+            <Button block type="primary" htmlType="submit" loading={loading}>
               Submit
         </Button>
           </Form.Item>
@@ -69,7 +69,7 @@ function mapStateToProps(state) {
   const { status } = state.login;
   return {
     status,
-    loading: state.loading.models.users,
+    loading: state.loading.models.login,
   };
 }
 

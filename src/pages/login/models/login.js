@@ -3,7 +3,8 @@ import { fakeAccountLogin } from '../services/login';
 export default {
   namespace: 'login',
   state: {
-    status
+    status: '',
+    type: false
   },
   reducers: {
     save(state, { payload }) {
