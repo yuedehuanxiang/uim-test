@@ -1,4 +1,5 @@
 import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
+import { connect } from 'umi';
 
 const layout = {
   labelCol: { span: 8 },
@@ -8,9 +9,13 @@ const tailLayout = {
   wrapperCol: { offset: 8, span: 16 },
 };
 
-const Login = () => {
+const Login = ({ dispatch }) => {
   const onFinish = values => {
     console.log('Success:', values);
+    dispatch({
+      type: 'login/login',
+      payload: { ...values },
+    });
   };
 
   const onFinishFailed = errorInfo => {
@@ -19,7 +24,7 @@ const Login = () => {
 
   return (
     <Row style={{ height: '100%' }} justify="space-around" align="middle">
-      <Col span={8}>
+      <Col span={6} pull={1}>
         <Form
           {...layout}
           name="basic"
@@ -29,7 +34,7 @@ const Login = () => {
         >
           <Form.Item
             label="Username"
-            name="username"
+            name="userName"
             rules={[{ required: true, message: 'Please input your username!' }]}
           >
             <Input />
@@ -43,7 +48,7 @@ const Login = () => {
             <Input.Password />
           </Form.Item>
 
-          <Form.Item {...tailLayout} name="remember" valuePropName="checked">
+          <Form.Item {...tailLayout} name="type" valuePropName="checked">
             <Checkbox>Remember me</Checkbox>
           </Form.Item>
 
@@ -60,4 +65,12 @@ const Login = () => {
   );
 };
 
-export default Login
+function mapStateToProps(state) {
+  const { status } = state.login;
+  return {
+    status,
+    loading: state.loading.models.users,
+  };
+}
+
+export default connect(mapStateToProps)(Login)
