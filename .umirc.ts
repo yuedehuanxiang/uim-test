@@ -17,40 +17,26 @@ export default defineConfig({
       ],
     },
     {
-      path: '/',
-      component: '@/layouts/SecurityLayout',
+      path: '/home',
+      component: '@/layouts/BasicLayout',
       routes: [
         {
-          path: '/',
-          component: '@/layouts/BasicLayout',
-          // authority: ['admin', 'user'],
-          routes: [
-            {
-              path: '/',
-              redirect: '/welcome',
-            },
-            {
-              path: '/welcome',
-              name: 'welcome',
-              // icon: 'smile',
-              component: './welcome',
-            },
-            {
-              component: './404',
-            },
-          ],
+          path: '/home/welcome',
+          name: 'welcome',
+          icon: 'smile',
+          component: './welcome',
         },
         {
           component: './404',
         },
       ],
     },
-    // {
-    //   exact: false, path: '/', component: '@/layouts/index',
-    //   routes: [
-    //     { exact: true, path: '/login', component: '@/pages/login' },
-    //     { exact: true, path: '/users', component: '@/pages/user' },
-    //   ],
-    // },
+    {
+      path: '/',
+      component: '@/layouts/SecurityLayout',
+    },
+    {
+      component: './404',
+    },
   ]
 });

@@ -1,4 +1,6 @@
 import { fakeAccountLogin } from '../services/login';
+import { history } from 'umi'
+import { notification } from 'antd';
 
 export default {
   namespace: 'login',
@@ -18,6 +20,18 @@ export default {
         type: 'save',
         payload: response,
       });
+      if (response.status === 'ok') {
+        localStorage.setItem('userInfo', JSON.stringify(response));
+        history.replace('/home/welcome');
+      } else {
+        notification.open(
+          {
+            message: 'network err',
+            description: response.msg,
+            duration: 2,
+          }
+        )
+      }
     }
   },
   subscriptions: {

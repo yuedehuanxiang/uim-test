@@ -11,6 +11,7 @@ export default {
     }
     res.send({
       status: 'error',
+      msg: '密码或者账号错误请重试',
       type,
       currentAuthority: 'guest',
     });

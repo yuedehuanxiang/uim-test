@@ -14,27 +14,35 @@ class SecurityLayout extends React.Component {
       this.setState({
         loading: true
       })
-    }, 3000);
+    }, 1000);
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    this.props.dispatch({
+      type: 'login/save',
+      payload: { ...userInfo },
+    })
+
   }
   componentWillUnmount() {
     clearInterval(this.timerID);
   }
   render() {
+    if (this.props.status === 'ok' && this.state.loading) {
+      return <Redirect to={`/home/welcome`} />
+    }
     if (this.state.loading) {
-      return <Redirect to={`/welcome`} />
+      return <Redirect to={`/user/login`} />
     } else {
-      return <h1>loading</h1>
+      return <img style={{ height: '100vh' }} src={require('../assets/loading.svg')} alt="logo" width="100%" />
     }
   }
 }
-// function SecurityLayout() {
-//   return (
-//     <div>
-//       <h1>
-//         welcome
-//       </h1>
-//     </div>
-//   )
-// }
 
-export default SecurityLayout
+function mapStateToProps(state) {
+  const { status } = state.login;
+  return {
+    status
+  };
+}
+
+
+export default connect(mapStateToProps)(SecurityLayout)
