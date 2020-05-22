@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Layout, Menu, Breadcrumb } from 'antd';
+import Avatar from '../components/GlobalHeader/AvatarDropdown'
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
@@ -40,6 +41,9 @@ export default function BasicLayout({ children }) {
             className: styles.trigger,
             onClick: () => { setCollapse(!collapsed) },
           })}
+          <div className={styles.rightContent}>
+            <Avatar />
+          </div>
         </Header>
         <Content
           className={styles.siteLayoutBackground}
